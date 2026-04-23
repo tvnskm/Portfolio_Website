@@ -264,34 +264,177 @@
     .hero-visual {
       display: flex;
       justify-content: center;
-      align-items: flex-end;
+      align-items: center;
       position: relative;
-      height: 100%;
-    }
-
-    .hero-profile-img {
-      width: 100%;
-      max-width: 460px;
-      height: auto;
-      max-height: 85vh;
-      object-fit: contain;
-      transform: translateY(150px);
       opacity: 0;
-      animation: slideUpProfile 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s forwards;
-      filter: drop-shadow(0 -10px 30px rgba(240, 180, 41, 0.2));
-      z-index: 2;
-      position: relative;
+      animation: fadeIn 1.2s ease 1s forwards;
+      transform-style: preserve-3d;
+      transition: transform 0.1s linear;
     }
 
-    @keyframes slideUpProfile {
+    .solar-system {
+      position: relative;
+      width: 600px;
+      height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-style: preserve-3d;
+    }
+
+    .sun {
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      background: var(--bg3);
+      position: relative;
+      z-index: 10;
+      box-shadow: 0 0 60px rgba(240, 180, 41, 0.2), inset 0 0 20px rgba(240, 180, 41, 0.5);
+      border: 2px solid rgba(240, 180, 41, 0.5);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sun .avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: sepia(20%) hue-rotate(5deg) brightness(1.1);
+      transition: all 0.5s;
+    }
+
+    .sun:hover .avatar-img {
+      filter: none;
+      transform: scale(1.05);
+    }
+
+    .ring {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 50%;
+      border: 1px dashed rgba(6, 214, 160, 0.4);
+      transform-style: preserve-3d;
+    }
+
+    .ring-1 {
+      transform: rotateX(70deg) rotateY(20deg);
+    }
+
+    .ring-2 {
+      transform: rotateX(60deg) rotateY(-40deg);
+      border-color: rgba(240, 180, 41, 0.4);
+    }
+
+    .ring-3 {
+      transform: rotateX(75deg) rotateY(60deg);
+      border-color: rgba(0, 240, 255, 0.4);
+    }
+
+    .planet-wrap {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+    }
+
+    .pw-1 {
+      animation: orbit1 6s linear infinite;
+    }
+
+    .pw-2 {
+      animation: orbit2 9s linear infinite reverse;
+    }
+
+    .pw-3 {
+      animation: orbit3 12s linear infinite;
+    }
+
+    @keyframes orbit1 {
+      to {
+        transform: rotateZ(360deg);
+      }
+    }
+
+    @keyframes orbit2 {
+      to {
+        transform: rotateZ(360deg);
+      }
+    }
+
+    @keyframes orbit3 {
+      to {
+        transform: rotateZ(360deg);
+      }
+    }
+
+    .planet {
+      position: absolute;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(10, 10, 15, 0.95);
+      border: 1px solid currentColor;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px currentColor, inset 0 0 10px currentColor;
+      backface-visibility: visible;
+    }
+
+    .planet svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+      filter: drop-shadow(0 0 5px currentColor);
+    }
+
+    .p-1 {
+      animation: counter-orbit1 6s linear infinite;
+      color: var(--teal);
+    }
+
+    .p-2 {
+      animation: counter-orbit2 9s linear infinite reverse;
+      color: var(--gold);
+    }
+
+    .p-3 {
+      animation: counter-orbit3 12s linear infinite;
+      color: #00f0ff;
+    }
+
+    @keyframes counter-orbit1 {
       from {
-        transform: translateY(150px);
-        opacity: 0;
+        transform: rotateZ(0deg) rotateY(-20deg) rotateX(-70deg);
       }
 
       to {
-        transform: translateY(0);
-        opacity: 1;
+        transform: rotateZ(-360deg) rotateY(-20deg) rotateX(-70deg);
+      }
+    }
+
+    @keyframes counter-orbit2 {
+      from {
+        transform: rotateZ(0deg) rotateY(40deg) rotateX(-60deg);
+      }
+
+      to {
+        transform: rotateZ(-360deg) rotateY(40deg) rotateX(-60deg);
+      }
+    }
+
+    @keyframes counter-orbit3 {
+      from {
+        transform: rotateZ(0deg) rotateY(-60deg) rotateX(-75deg);
+      }
+
+      to {
+        transform: rotateZ(-360deg) rotateY(-60deg) rotateX(-75deg);
       }
     }
 
@@ -1024,10 +1167,79 @@
         scroll-behavior: auto !important;
       }
     }
+
+    .hero-marquee {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      background: rgba(240, 180, 41, 0.03);
+      border-top: 1px solid rgba(240, 180, 41, 0.1);
+      border-bottom: 1px solid rgba(240, 180, 41, 0.1);
+      padding: 0.8rem 0;
+      white-space: nowrap;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .marquee-content {
+      display: inline-block;
+      animation: marquee 25s linear infinite;
+    }
+
+    .marquee-content span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin: 0 1.5rem;
+    }
+
+    .marquee-content .star {
+      color: var(--teal);
+      font-size: 0.9rem;
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .tech-coords {
+      position: absolute;
+      top: 35%;
+      right: 45%;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .coord-svg {
+      animation: spin 40s linear infinite;
+    }
+
+    .coord-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.55rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
   </style>
 </head>
 
 <body>
+  <canvas id="vfxCanvas"
+    style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; pointer-events:none; opacity: 0.6;"></canvas>
 
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
@@ -1051,16 +1263,91 @@
       <h1 class="hero-name">Mohan<br /><span>VNSK</span><br />Tiruvaipati</h1>
       <p class="hero-role">AI/ML Engineer · Full Stack Developer · ACM Chairperson. Building intelligent systems and
         elegant interfaces — from computer vision to cloud-native backends.</p>
-      <p class="hero-cgpa">CGPA <span>9.62</span> / 10.0 &nbsp;·&nbsp; Google for Developers Intern &nbsp;·&nbsp; Region
-        4 ACM Coordinator</p>
+      <p class="hero-cgpa">CGPA <span>9.62</span> / 10.0 &nbsp;·&nbsp; Python Back-end Developer &nbsp;
+      </p>
       <div class="hero-btns">
         <a href="#projects" class="btn-primary">View Projects</a>
         <a href="https://github.com/tvnskm" target="_blank" class="btn-outline">GitHub ↗</a>
         <a href="#contact" class="btn-outline">Contact</a>
       </div>
     </div>
+
+    <div class="tech-coords">
+      <svg width="60" height="60" viewBox="0 0 60 60" class="coord-svg">
+        <circle cx="30" cy="30" r="28" fill="none" stroke="rgba(6,214,160,0.2)" stroke-dasharray="4 4" />
+        <circle cx="30" cy="30" r="10" fill="none" stroke="rgba(240,180,41,0.3)" />
+        <line x1="30" y1="0" x2="30" y2="60" stroke="rgba(255,255,255,0.1)" />
+        <line x1="0" y1="30" x2="60" y2="30" stroke="rgba(255,255,255,0.1)" />
+      </svg>
+      <div class="coord-text">LAT: 12.82°N<br>LNG: 80.04°E</div>
+    </div>
+
     <div class="hero-visual">
-      <img src="IMG_0798.PNG" alt="Mohan VNSK" class="hero-profile-img" />
+      <div class="solar-system">
+        <div class="sun">
+          <img src="IMG_0798.PNG" class="avatar-img" alt="Mohan VNSK" />
+        </div>
+        <div class="ring ring-1">
+          <div class="planet-wrap pw-1">
+            <div class="planet p-1" style="top: -22px; left: 50%; margin-left: -22px;" title="Code">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M9.4 16.6L4.8 12L9.4 7.4L8 6L2 12L8 18L9.4 16.6ZM14.6 16.6L19.2 12L14.6 7.4L16 6L22 12L16 18L14.6 16.6Z" />
+              </svg>
+            </div>
+            <div class="planet p-1" style="bottom: -22px; left: 50%; margin-left: -22px;" title="AI">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="ring ring-2">
+          <div class="planet-wrap pw-2">
+            <div class="planet p-2" style="top: 50%; left: -22px; margin-top: -22px;" title="Cloud">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M19.35 10.04C18.67 6.59 15.64 4 12 4C9.11 4 6.6 5.64 5.35 8.04C2.34 8.36 0 10.91 0 14C0 17.31 2.69 20 6 20H19C21.76 20 24 17.76 24 15C24 12.36 21.95 10.22 19.35 10.04Z" />
+              </svg>
+            </div>
+            <div class="planet p-2" style="top: 50%; right: -22px; margin-top: -22px; color: #ff3366;" title="Database">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 3C7.58 3 4 4.79 4 7C4 9.21 7.58 11 12 11C16.42 11 20 9.21 20 7C20 4.79 16.42 3 12 3ZM4 9V12C4 14.21 7.58 16 12 16C16.42 16 20 14.21 20 12V9C20 11.21 16.42 13 12 13C7.58 13 4 11.21 4 9ZM4 14V17C4 19.21 7.58 21 12 21C16.42 21 20 19.21 20 17V14C20 16.21 16.42 18 12 18C7.58 18 4 16.21 4 14Z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="ring ring-3">
+          <div class="planet-wrap pw-3">
+            <div class="planet p-3" style="top: 15%; right: 10%;" title="Machine Learning">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM12 11.99H19C18.47 16.11 15.72 19.78 12 20.92V12H5V6.3L12 3.19V11.99Z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-marquee">
+      <div class="marquee-content">
+        <span>AI/ML ENGINEERING</span><span class="star">✦</span>
+        <span>FULL STACK DEV</span><span class="star">✦</span>
+        <span>CLOUD ARCHITECTURE</span><span class="star">✦</span>
+        <span>DATA SCIENCE</span><span class="star">✦</span>
+        <span>NEURAL NETWORKS</span><span class="star">✦</span>
+        <span>COMPUTER VISION</span><span class="star">✦</span>
+        <span>LLM INTEGRATION</span><span class="star">✦</span>
+        <span>AI/ML ENGINEERING</span><span class="star">✦</span>
+        <span>FULL STACK DEV</span><span class="star">✦</span>
+        <span>CLOUD ARCHITECTURE</span><span class="star">✦</span>
+        <span>DATA SCIENCE</span><span class="star">✦</span>
+        <span>NEURAL NETWORKS</span><span class="star">✦</span>
+        <span>COMPUTER VISION</span><span class="star">✦</span>
+        <span>LLM INTEGRATION</span><span class="star">✦</span>
+      </div>
     </div>
   </section>
 
@@ -1446,6 +1733,108 @@
       });
     }, { threshold: 0.08 });
     if (projCards[0]) pObs.observe(projCards[0]);
+    // 3D Tilt Effect on Hero
+    const heroVisual = document.querySelector('.hero-visual');
+    const heroText = document.querySelector('.hero-text');
+
+    document.addEventListener('mousemove', (e) => {
+      const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+      const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+
+      if (heroVisual) {
+        heroVisual.style.transform = `perspective(1000px) rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+      }
+    });
+
+    // 3D Card Hover Effects
+    document.querySelectorAll('.project-card, .skill-card, .edu-card, .stat-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const rotateX = ((y / rect.height) - 0.5) * -15;
+        const rotateY = ((x / rect.width) - 0.5) * 15;
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+        card.style.transition = 'none';
+        card.style.zIndex = 10;
+        card.style.boxShadow = '0 20px 40px rgba(240,180,41,0.15)';
+        card.style.borderColor = 'rgba(240,180,41,0.6)';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+        card.style.transition = 'transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease';
+        card.style.zIndex = 1;
+        card.style.boxShadow = 'none';
+        card.style.borderColor = 'var(--border)';
+      });
+    });
+
+    // Antigravity Canvas VFX
+    const canvas = document.getElementById('vfxCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    let particlesArray = [];
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.1;
+        this.speedX = Math.random() * 0.6 - 0.3;
+        this.speedY = Math.random() * 0.6 - 0.3;
+        this.color = Math.random() > 0.5 ? 'rgba(240,180,41,0.6)' : 'rgba(6,214,160,0.4)';
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x > canvas.width) this.x = 0;
+        else if (this.x < 0) this.x = canvas.width;
+        if (this.y > canvas.height) this.y = 0;
+        else if (this.y < 0) this.y = canvas.height;
+      }
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particlesArray = [];
+      for (let i = 0; i < 120; i++) particlesArray.push(new Particle());
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+        for (let j = i; j < particlesArray.length; j++) {
+          const dx = particlesArray[i].x - particlesArray[j].x;
+          const dy = particlesArray[i].y - particlesArray[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < 150) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 - distance / 1500})`;
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+            ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    initParticles();
+    animateParticles();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles();
+    });
   </script>
 </body>
 
