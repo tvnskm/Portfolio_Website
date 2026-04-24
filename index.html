@@ -1363,13 +1363,17 @@
     <h2 class="section-title">Driven by <em>curiosity</em>,<br />powered by code.</h2>
     <div class="about-grid">
       <div class="about-text">
-        <p>I'm Mohan — a Computer Science student at SRMIST with a 9.62 CGPA, Chairperson of the SRM ACM Student
-          Chapter, and ACM India Region 4 Coordinator for Tamil Nadu & Kerala.</p>
-        <p>My work spans training ML models at Google for Developers (AICTE), building a Telugu LLM at VISWAM.AI, and
-          developing production systems — a road hazard detector using YOLOv8, a drowsiness detection system, an AI
-          financial analytics platform, and more.</p>
-        <p>Beyond code, I teach programming as an Assistant Coding Instructor at Life Turn Institute and volunteer with
-          SRMIST's Directorate of Student Affairs — because great technology is built by people who care about people.
+        <p>
+          Hey, I’m Mohan — a CS student at SRMIST.
+          I build real-world AI/ML systems and ship projects that actually work.
+        </p>
+        <p>
+          Worked on ML training with Google for Developers, contributed to a Telugu LLM at VISWAM.AI,
+          and built things like a road hazard detector (YOLOv8), drowsiness detection system,
+          and an AI finance analytics platform.
+        </p>
+        <p>
+          I also lead communities (ACM), teach coding, and help people get better at tech.
         </p>
       </div>
       <div class="about-stats">
@@ -1378,15 +1382,15 @@
           <div class="stat-desc">CGPA (5 Semesters)</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num">6+</div>
+          <div class="stat-num" id="stat-projects">6+</div>
           <div class="stat-desc">Projects Built</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num">3</div>
+          <div class="stat-num" id="stat-internships">3</div>
           <div class="stat-desc">Internships</div>
         </div>
         <div class="stat-card">
-          <div class="stat-num">4</div>
+          <div class="stat-num" id="stat-certs">4</div>
           <div class="stat-desc">Certifications</div>
         </div>
       </div>
@@ -1816,6 +1820,19 @@
     });
 
     // Video background handled via HTML5 video tag
+
+    // Auto-update stats based on actual cards in DOM
+    const updateStats = () => {
+      const projectCount = document.querySelectorAll('.project-card').length;
+      const certCount = document.querySelectorAll('.cert-card').length;
+      
+      const projectStat = document.getElementById('stat-projects');
+      const certStat = document.getElementById('stat-certs');
+      
+      if(projectStat && projectCount > 0) projectStat.textContent = projectCount + "+";
+      if(certStat && certCount > 0) certStat.textContent = certCount;
+    };
+    updateStats();
   </script>
 </body>
 
