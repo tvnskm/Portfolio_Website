@@ -21,7 +21,17 @@
       --text: #e8e8f0;
       --muted: #7c7c9a;
       --border: rgba(240, 180, 41, 0.15);
-      --card: rgba(255, 255, 255, 0.03);
+      --card: rgba(255, 255, 255, 0.07);
+    }
+
+    .skill-card,
+    .project-card,
+    .edu-card,
+    .stat-card,
+    .cert-card,
+    .ach-card {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     *,
@@ -1238,14 +1248,18 @@
 </head>
 
 <body>
-  <canvas id="vfxCanvas"
-    style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; pointer-events:none; opacity: 0.6;"></canvas>
+  <!-- Video Background -->
+  <video autoplay loop muted playsinline id="bg-video"
+    style="position:fixed; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-2; opacity:0.6; pointer-events:none;">
+    <!-- Abstract Tech Video from Codepen -->
+    <source src="https://assets.codepen.io/3364143/7btrrd.mp4" type="video/mp4">
+  </video>
 
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
   <nav>
-    <div class="nav-logo">M · Portfolio</div>
+    <div class="nav-logo">Tvnskm · Portfolio</div>
     <div class="nav-links">
       <a href="#about">About</a>
       <a href="#skills">Skills</a>
@@ -1272,15 +1286,7 @@
       </div>
     </div>
 
-    <div class="tech-coords">
-      <svg width="60" height="60" viewBox="0 0 60 60" class="coord-svg">
-        <circle cx="30" cy="30" r="28" fill="none" stroke="rgba(6,214,160,0.2)" stroke-dasharray="4 4" />
-        <circle cx="30" cy="30" r="10" fill="none" stroke="rgba(240,180,41,0.3)" />
-        <line x1="30" y1="0" x2="30" y2="60" stroke="rgba(255,255,255,0.1)" />
-        <line x1="0" y1="30" x2="60" y2="30" stroke="rgba(255,255,255,0.1)" />
-      </svg>
-      <div class="coord-text">LAT: 12.82°N<br>LNG: 80.04°E</div>
-    </div>
+
 
     <div class="hero-visual">
       <div class="solar-system">
@@ -1610,24 +1616,64 @@
     <h2 class="section-title">Verified<br /><em>credentials.</em></h2>
     <div class="certs-grid">
       <div class="cert-card">
-        <span class="cert-icon">🤖</span>
-        <div class="cert-name">Introduction to Machine Learning</div>
-        <div class="cert-issuer">NPTEL · IIT</div>
+        <span class="cert-icon">☁️</span>
+        <div class="cert-name">AWS Certifications Cloud Foundations</div>
+        <div class="cert-issuer">Amazon Web Services · Jun 2025</div>
       </div>
       <div class="cert-card">
-        <span class="cert-icon">☁️</span>
-        <div class="cert-name">AWS Cloud Practitioner</div>
-        <div class="cert-issuer">Amazon Web Services · Jul 2025</div>
+        <span class="cert-icon">🧠</span>
+        <div class="cert-name">AWS Certifications Generative AI</div>
+        <div class="cert-issuer">Amazon Web Services · Apr 2026</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-icon">🏗️</span>
+        <div class="cert-name">AWS Certified Solutions Architect</div>
+        <div class="cert-issuer">Amazon Web Services · Jun 2025</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-icon">🏢</span>
+        <div class="cert-name">SAP Certified Development Specialist - ABAP for SAP HANA</div>
+        <div class="cert-issuer">SAP · Apr 2026</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-icon">🍃</span>
+        <div class="cert-name">MongoDB Certified Developer, Associate</div>
+        <div class="cert-issuer">MongoDB · Apr 2026</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-icon">🤖</span>
+        <div class="cert-name">Introduction to Machine Learning</div>
+        <div class="cert-issuer">NPTEL · Jul 2025</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-icon">🎓</span>
+        <div class="cert-name">AI-ML Virtual Internship</div>
+        <div class="cert-issuer">Google for Developers · Jan 2025</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-icon">🌐</span>
+        <div class="cert-name">Introduction to Modern AI</div>
+        <div class="cert-issuer">Cisco Networking Academy · Mar 2025</div>
       </div>
       <div class="cert-card">
         <span class="cert-icon">🔶</span>
-        <div class="cert-name">OCI Foundations Associate</div>
-        <div class="cert-issuer">Oracle University</div>
+        <div class="cert-name">Oracle Cloud Infrastructure 2024 Data Foundations Associate</div>
+        <div class="cert-issuer">Oracle · Mar 2025</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-icon">📊</span>
+        <div class="cert-name">Introduction to Data Science</div>
+        <div class="cert-issuer">Cisco · Mar 2025</div>
       </div>
       <div class="cert-card">
         <span class="cert-icon">☕</span>
         <div class="cert-name">Programming in Java</div>
-        <div class="cert-issuer">NPTEL · IIT</div>
+        <div class="cert-issuer">NPTEL · Nov 2024</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-icon">⚙️</span>
+        <div class="cert-name">C++</div>
+        <div class="cert-issuer">University of Illinois Urbana-Champaign · Apr 2024</div>
       </div>
     </div>
   </section>
@@ -1769,72 +1815,7 @@
       });
     });
 
-    // Antigravity Canvas VFX
-    const canvas = document.getElementById('vfxCanvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    let particlesArray = [];
-
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 0.1;
-        this.speedX = Math.random() * 0.6 - 0.3;
-        this.speedY = Math.random() * 0.6 - 0.3;
-        this.color = Math.random() > 0.5 ? 'rgba(240,180,41,0.6)' : 'rgba(6,214,160,0.4)';
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x > canvas.width) this.x = 0;
-        else if (this.x < 0) this.x = canvas.width;
-        if (this.y > canvas.height) this.y = 0;
-        else if (this.y < 0) this.y = canvas.height;
-      }
-      draw() {
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    function initParticles() {
-      particlesArray = [];
-      for (let i = 0; i < 120; i++) particlesArray.push(new Particle());
-    }
-
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
-        particlesArray[i].draw();
-        for (let j = i; j < particlesArray.length; j++) {
-          const dx = particlesArray[i].x - particlesArray[j].x;
-          const dy = particlesArray[i].y - particlesArray[j].y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          if (distance < 150) {
-            ctx.beginPath();
-            ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 - distance / 1500})`;
-            ctx.lineWidth = 0.5;
-            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
-            ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-      requestAnimationFrame(animateParticles);
-    }
-    initParticles();
-    animateParticles();
-
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      initParticles();
-    });
+    // Video background handled via HTML5 video tag
   </script>
 </body>
 
